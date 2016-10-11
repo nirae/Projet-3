@@ -100,13 +100,23 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
-        // homepage
+        // reservation_homepage
         if (rtrim($pathinfo, '/') === '') {
             if (substr($pathinfo, -1) !== '/') {
-                return $this->redirect($pathinfo.'/', 'homepage');
+                return $this->redirect($pathinfo.'/', 'reservation_homepage');
             }
 
-            return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);
+            return array (  '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::indexAction',  '_route' => 'reservation_homepage',);
+        }
+
+        // recapitulatif
+        if ($pathinfo === '/recapitulatif') {
+            return array (  '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::recapAction',  '_route' => 'recapitulatif',);
+        }
+
+        // cgv
+        if ($pathinfo === '/conditions-generales') {
+            return array (  '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::cgvAction',  '_route' => 'cgv',);
         }
 
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
