@@ -1,0 +1,11 @@
+reservation_homepage:
+    path:     /
+    defaults: { _controller: LouvreReservationBundle:Reservation:index }
+
+recapitulatif:
+    path:   /recapitulatif
+    defaults: { _controller: LouvreReservationBundle:Reservation:recap }
+
+cgv:
+    path:   /conditions-generales
+    defaults: { _controller: LouvreReservationBundle:Reservation:cgv }
