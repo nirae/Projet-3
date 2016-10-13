@@ -2,6 +2,7 @@
 
 namespace Louvre\ReservationBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -33,9 +34,14 @@ class Order {
     private $dayVisit;
 
     /**
-     * @ORM\Column(name="ticket_type", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255)
      */
-    private $ticketType;
+    private $email;
+
+    /**
+     * @ORM\Column(name="hald_day", type="boolean")
+     */
+    private $halfDay = false;
 
     /**
      * @ORM\Column(name="total", type="integer")
@@ -47,10 +53,17 @@ class Order {
      */
     private $stripeToken;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order")
+     */
+    private $tickets;
+
     // Constructeur
     public function __construct()
     {
         $this->date = new \Datetime();
+        $this->dayVisit = new \Datetime();
+        $this->tickets = new ArrayCollection();
     }
 
     /**
@@ -136,30 +149,6 @@ class Order {
     }
 
     /**
-     * Set ticketType
-     *
-     * @param string $ticketType
-     *
-     * @return Order
-     */
-    public function setTicketType($ticketType)
-    {
-        $this->ticketType = $ticketType;
-
-        return $this;
-    }
-
-    /**
-     * Get ticketType
-     *
-     * @return string
-     */
-    public function getTicketType()
-    {
-        return $this->ticketType;
-    }
-
-    /**
      * Set total
      *
      * @param integer $total
@@ -205,5 +194,89 @@ class Order {
     public function getStripeToken()
     {
         return $this->stripeToken;
+    }
+
+    /**
+     * Set halfDay
+     *
+     * @param boolean $halfDay
+     *
+     * @return Order
+     */
+    public function setHalfDay($halfDay)
+    {
+        $this->halfDay = $halfDay;
+
+        return $this;
+    }
+
+    /**
+     * Get halfDay
+     *
+     * @return boolean
+     */
+    public function getHalfDay()
+    {
+        return $this->halfDay;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+     *
+     * @return Order
+     */
+    public function addTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        $tickets->setOrder($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+     */
+    public function removeTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Order
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
     }
 }

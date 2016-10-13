@@ -15,19 +15,24 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_62be6aaba0de8f758bc4d57895d0c84515aff4e694656c2f61461b6080d1e4ae = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_62be6aaba0de8f758bc4d57895d0c84515aff4e694656c2f61461b6080d1e4ae->enter($__internal_62be6aaba0de8f758bc4d57895d0c84515aff4e694656c2f61461b6080d1e4ae_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
+        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b->enter($__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
 <html>
     <body>
         Recap
+
+        ";
+        // line 6
+        echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
+        echo "
     </body>
 </html>
 ";
         
-        $__internal_62be6aaba0de8f758bc4d57895d0c84515aff4e694656c2f61461b6080d1e4ae->leave($__internal_62be6aaba0de8f758bc4d57895d0c84515aff4e694656c2f61461b6080d1e4ae_prof);
+        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b->leave($__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b_prof);
 
     }
 
@@ -36,9 +41,14 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         return "LouvreReservationBundle:Reservation:recapitulatif.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  22 => 1,);
+        return array (  29 => 6,  22 => 1,);
     }
 
     public function getSource()
@@ -47,6 +57,8 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 <html>
     <body>
         Recap
+
+        {{ email }}
     </body>
 </html>
 ";

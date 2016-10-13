@@ -48,7 +48,7 @@ class Ticket {
     private $ticketPrice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Order")
+     * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Order", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $order;
