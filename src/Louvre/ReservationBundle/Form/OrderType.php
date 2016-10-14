@@ -21,7 +21,10 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('dayVisit', DateType::class)
+            ->add('dayVisit', DateType::class, array(
+                'format' => 'dd-MM-yyyy',
+                'years' => range(date('Y'), date('Y') + 1),
+            ))
             ->add('halfDay', CheckboxType::class, array('required' => false))
             ->add('email', EmailType::class)
             ->add('tickets', CollectionType::class, array(

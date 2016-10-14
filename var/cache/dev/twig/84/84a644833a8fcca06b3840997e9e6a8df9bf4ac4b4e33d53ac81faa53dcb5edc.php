@@ -15,19 +15,86 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_c37aaef48ef9841e8ad3de4b948105328893c90e46c675329daf915fb7c00fcf = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c37aaef48ef9841e8ad3de4b948105328893c90e46c675329daf915fb7c00fcf->enter($__internal_c37aaef48ef9841e8ad3de4b948105328893c90e46c675329daf915fb7c00fcf_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
+        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52->enter($__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
 <html>
 <body>
-    Hello World!
     ";
-        // line 5
-        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form');
+        // line 4
+        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_start');
         echo "
+        ";
+        // line 5
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'errors');
+        echo "
+
+        <div>
+            ";
+        // line 8
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dayVisit", array()), 'label', array("label" => "Jour de la visite"));
+        echo "
+            ";
+        // line 9
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dayVisit", array()), 'errors');
+        echo "
+            ";
+        // line 10
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "dayVisit", array()), 'widget');
+        echo "
+        </div>
+        <div>
+            ";
+        // line 13
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "halfDay", array()), 'label', array("label" => "Demi-journée"));
+        echo "
+            ";
+        // line 14
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "halfDay", array()), 'errors');
+        echo "
+            ";
+        // line 15
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "halfDay", array()), 'widget');
+        echo "
+        </div>
+        <div>
+            ";
+        // line 18
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'label', array("label" => "Email"));
+        echo "
+            ";
+        // line 19
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'errors');
+        echo "
+            ";
+        // line 20
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "email", array()), 'widget');
+        echo "
+        </div>
+        <div>
+            ";
+        // line 23
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tickets", array()), 'label', array("label" => "Billets :"));
+        echo "
+            ";
+        // line 24
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tickets", array()), 'errors');
+        echo "
+            ";
+        // line 25
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tickets", array()), 'widget');
+        echo "
+        </div>
     <a href=\"#\" id=\"add_ticket\" class=\"btn btn-default\">Ajouter un billet</a>
+    ";
+        // line 28
+        echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
+        echo "
+
+
+
     <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
     <script type=\"text/javascript\">
 
@@ -102,7 +169,7 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 </html>
 ";
         
-        $__internal_c37aaef48ef9841e8ad3de4b948105328893c90e46c675329daf915fb7c00fcf->leave($__internal_c37aaef48ef9841e8ad3de4b948105328893c90e46c675329daf915fb7c00fcf_prof);
+        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52->leave($__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52_prof);
 
     }
 
@@ -118,7 +185,7 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 
     public function getDebugInfo()
     {
-        return array (  28 => 5,  22 => 1,);
+        return array (  93 => 28,  87 => 25,  83 => 24,  79 => 23,  73 => 20,  69 => 19,  65 => 18,  59 => 15,  55 => 14,  51 => 13,  45 => 10,  41 => 9,  37 => 8,  31 => 5,  27 => 4,  22 => 1,);
     }
 
     public function getSource()
@@ -126,9 +193,34 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         return "<!DOCTYPE html>
 <html>
 <body>
-    Hello World!
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.dayVisit, 'Jour de la visite') }}
+            {{ form_errors(form.dayVisit) }}
+            {{ form_widget(form.dayVisit) }}
+        </div>
+        <div>
+            {{ form_label(form.halfDay, 'Demi-journée') }}
+            {{ form_errors(form.halfDay) }}
+            {{ form_widget(form.halfDay) }}
+        </div>
+        <div>
+            {{ form_label(form.email, 'Email') }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div>
+            {{ form_label(form.tickets, 'Billets :') }}
+            {{ form_errors(form.tickets) }}
+            {{ form_widget(form.tickets) }}
+        </div>
     <a href=\"#\" id=\"add_ticket\" class=\"btn btn-default\">Ajouter un billet</a>
+    {{ form_end(form) }}
+
+
+
     <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
     <script type=\"text/javascript\">
 

@@ -17,7 +17,8 @@ class ReservationController extends Controller
         $form = $this->get('form.factory')->create(OrderType::class, $order);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            // Calcul tarifs
+            // Calcul tarifs + validation des critères
+            // + hydratation entité
             // L'objet hydraté par le formulaire est mis dans la session
             $session = $request->getSession();
             $session->set('order', $order);
@@ -35,9 +36,19 @@ class ReservationController extends Controller
         $session = $request->getSession();
         $order = $session->get('order');
 
-        // Penser à détruire la session une fois fini
+        // Récuperer le token stripe via Ajax
+         if ($request->isXmlHttpRequest()) {
+
+         }
+
+        // Si le token a été reçu, on envoi un email
+        // et on flush la commande
+        // Et envoi d'un message flash de remerciement
+
+        // Détruire la session une fois fini?
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
+            // Test d'affichage
             'email' => $order->getEmail(),
         ));
     }

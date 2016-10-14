@@ -4,6 +4,8 @@ namespace Louvre\ReservationBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="order")
@@ -20,6 +22,7 @@ class Order {
 
     /**
      * @ORM\Column(name="date", type="datetime")
+     * @Assert\DateTime
      */
     private $date;
 
@@ -61,6 +64,7 @@ class Order {
     // Constructeur
     public function __construct()
     {
+        // ToDo: Générer le numéro de commande
         $this->date = new \Datetime();
         $this->dayVisit = new \Datetime();
         $this->tickets = new ArrayCollection();

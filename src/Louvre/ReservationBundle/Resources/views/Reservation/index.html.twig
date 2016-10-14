@@ -1,9 +1,36 @@
 <!DOCTYPE html>
 <html>
 <body>
-    Hello World!
-    {{ form(form) }}
+    {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        <div>
+            {{ form_label(form.dayVisit, 'Jour de la visite') }}
+            {{ form_errors(form.dayVisit) }}
+            {{ form_widget(form.dayVisit) }}
+        </div>
+        <div>
+            {{ form_label(form.halfDay, 'Demi-journée') }}
+            {{ form_errors(form.halfDay) }}
+            {{ form_widget(form.halfDay) }}
+        </div>
+        <div>
+            {{ form_label(form.email, 'Email') }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email) }}
+        </div>
+        <div>
+            {{ form_label(form.tickets, 'Billets :') }}
+            {{ form_errors(form.tickets) }}
+            {{ form_widget(form.tickets) }}
+        </div>
+        {# A terminer #}
     <a href="#" id="add_ticket" class="btn btn-default">Ajouter un billet</a>
+    {{ form_end(form) }}
+
+
+    {# Ici temporairement #}
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript">
 
