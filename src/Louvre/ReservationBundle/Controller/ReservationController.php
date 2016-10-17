@@ -45,11 +45,11 @@ class ReservationController extends Controller
         // et on flush la commande
         // Et envoi d'un message flash de remerciement
 
-        // Détruire la session une fois fini?
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
             // Test d'affichage
             'email' => $order->getEmail(),
+            'dayVisit' => date('d/m/Y', $order->getDayVisit()->getTimestamp()),
         ));
     }
 

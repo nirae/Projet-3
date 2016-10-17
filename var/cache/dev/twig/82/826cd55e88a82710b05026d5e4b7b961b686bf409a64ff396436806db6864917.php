@@ -15,8 +15,8 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b->enter($__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
+        $__internal_7da2a982e87ccf642c5018cfc77c524c0c02a13128a5c9eeb3815004676f8971 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_7da2a982e87ccf642c5018cfc77c524c0c02a13128a5c9eeb3815004676f8971->enter($__internal_7da2a982e87ccf642c5018cfc77c524c0c02a13128a5c9eeb3815004676f8971_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -28,11 +28,15 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         // line 6
         echo twig_escape_filter($this->env, (isset($context["email"]) ? $context["email"] : $this->getContext($context, "email")), "html", null, true);
         echo "
+        ";
+        // line 7
+        echo twig_escape_filter($this->env, (isset($context["dayVisit"]) ? $context["dayVisit"] : $this->getContext($context, "dayVisit")), "html", null, true);
+        echo "
     </body>
 </html>
 ";
         
-        $__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b->leave($__internal_91acdea99deb7e3e572e128874f67156bd6ca4b898b9fa38526a12839e2b2c4b_prof);
+        $__internal_7da2a982e87ccf642c5018cfc77c524c0c02a13128a5c9eeb3815004676f8971->leave($__internal_7da2a982e87ccf642c5018cfc77c524c0c02a13128a5c9eeb3815004676f8971_prof);
 
     }
 
@@ -48,7 +52,7 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 
     public function getDebugInfo()
     {
-        return array (  29 => 6,  22 => 1,);
+        return array (  33 => 7,  29 => 6,  22 => 1,);
     }
 
     public function getSource()
@@ -59,6 +63,7 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         Recap
 
         {{ email }}
+        {{ dayVisit }}
     </body>
 </html>
 ";

@@ -15,8 +15,8 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52->enter($__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
+        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f->enter($__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -87,14 +87,18 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->searchAndRenderBlock($this->getAttribute((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), "tickets", array()), 'widget');
         echo "
         </div>
-    <a href=\"#\" id=\"add_ticket\" class=\"btn btn-default\">Ajouter un billet</a>
-    ";
+        ";
         // line 28
+        echo "    <a href=\"#\" id=\"add_ticket\" class=\"btn btn-default\">Ajouter un billet</a>
+    ";
+        // line 29
         echo         $this->env->getExtension('Symfony\Bridge\Twig\Extension\FormExtension')->renderer->renderBlock((isset($context["form"]) ? $context["form"] : $this->getContext($context, "form")), 'form_end');
         echo "
 
 
-
+    ";
+        // line 33
+        echo "
     <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
     <script type=\"text/javascript\">
 
@@ -169,7 +173,7 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 </html>
 ";
         
-        $__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52->leave($__internal_a195616269a5122cbc89d3c4ae43d4c50cf3b2320e2cbb15902ff3f45f1acf52_prof);
+        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f->leave($__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f_prof);
 
     }
 
@@ -185,7 +189,7 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 
     public function getDebugInfo()
     {
-        return array (  93 => 28,  87 => 25,  83 => 24,  79 => 23,  73 => 20,  69 => 19,  65 => 18,  59 => 15,  55 => 14,  51 => 13,  45 => 10,  41 => 9,  37 => 8,  31 => 5,  27 => 4,  22 => 1,);
+        return array (  101 => 33,  95 => 29,  92 => 28,  87 => 25,  83 => 24,  79 => 23,  73 => 20,  69 => 19,  65 => 18,  59 => 15,  55 => 14,  51 => 13,  45 => 10,  41 => 9,  37 => 8,  31 => 5,  27 => 4,  22 => 1,);
     }
 
     public function getSource()
@@ -216,10 +220,12 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
             {{ form_errors(form.tickets) }}
             {{ form_widget(form.tickets) }}
         </div>
+        {# A terminer #}
     <a href=\"#\" id=\"add_ticket\" class=\"btn btn-default\">Ajouter un billet</a>
     {{ form_end(form) }}
 
 
+    {# Ici temporairement #}
 
     <script src=\"//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js\"></script>
     <script type=\"text/javascript\">
