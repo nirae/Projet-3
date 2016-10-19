@@ -19,26 +19,33 @@ class Ticket {
 
     /**
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
      */
     private $name;
 
     /**
      * @ORM\Column(name="first_name", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Type("string")
      */
     private $firstName;
 
     /**
      * @ORM\Column(name="birth_date", type="datetime")
+     * @Assert\Date()
      */
     private $birthDate;
 
     /**
      * @ORM\Column(name="country", type="string", length=255)
+     * @Assert\Country()
      */
     private $country;
 
     /**
      * @ORM\Column(name="reduced_price", type="boolean")
+     * @Assert\Type("bool")
      */
     private $reducedPrice = false;
 
@@ -121,7 +128,13 @@ class Ticket {
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-
+        // Calcul de l'age
+        $age = $this->calculAge($birthDate);
+        // Calcul du tarif
+        $prix = $this->calculPrice($age, $this->reducedPrice);
+        // Remplissage du tarif
+        $this->setTicketPrice($prix);
+        
         return $this;
     }
 
@@ -229,5 +242,43 @@ class Ticket {
     public function getOrder()
     {
         return $this->order;
+    }
+
+    // Calcul de l'age
+    private function calculAge($birthDate)
+    {
+        // Découpage date de naissance
+        $year =  intval(date('Y', $birthDate->getTimestamp()));
+        $month = intval(date('m', $birthDate->getTimestamp()));
+        $day = intval(date('d', $birthDate->getTimestamp()));
+
+        // Découpage date actuelle
+        $y = intval(date('Y'));
+        $m = intval(date('m'));
+        $d = intval(date('d'));
+
+        if (($month < $m) || (($month == $m) && ($day <= $d))) {
+            $age = $y - $year;
+            return $age;
+        } else {
+            $age = ($y - $year) - 1;
+            return $age;
+        }
+
+    }
+
+    // Calcul du tarif
+    public function calculPrice($age, $reducedPrice = false) {
+        $price = 16;
+
+        if ($age < 4) {
+            $price = 0;
+        } elseif ($age > 4 && $age < 12) {
+            $price = 8;
+        } elseif ($age > 60) {
+            $price = 12;
+        }
+
+        return $price;
     }
 }

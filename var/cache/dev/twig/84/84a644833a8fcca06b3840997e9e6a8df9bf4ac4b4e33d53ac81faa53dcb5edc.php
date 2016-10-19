@@ -15,8 +15,8 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f->enter($__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
+        $__internal_2a53005e31bffac567a8daf3136da5deff5fb1007a6327de783b870fec5e7f1b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_2a53005e31bffac567a8daf3136da5deff5fb1007a6327de783b870fec5e7f1b->enter($__internal_2a53005e31bffac567a8daf3136da5deff5fb1007a6327de783b870fec5e7f1b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:index.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -121,11 +121,6 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
         if (index == 0) {
             addTicket(\$container);
-        } else {
-            // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-            \$container.children('div').each(function() {
-                addDeleteLink(\$(this));
-            });
         }
 
         // La fonction qui ajoute un formulaire CategoryType
@@ -142,7 +137,9 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
             var \$prototype = \$(template);
 
             // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-            addDeleteLink(\$prototype);
+            if (index != 0) {
+                addDeleteLink(\$prototype);
+            }
 
             // On ajoute le prototype modifié à la fin de la balise <div>
             \$container.append(\$prototype);
@@ -155,10 +152,8 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         function addDeleteLink(\$prototype) {
             // Création du lien
             var \$deleteLink = \$('<a href=\"#\" class=\"btn btn-danger\">Supprimer</a>');
-
             // Ajout du lien
             \$prototype.append(\$deleteLink);
-
             // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
             \$deleteLink.click(function(e) {
                 \$prototype.remove();
@@ -173,7 +168,7 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
 </html>
 ";
         
-        $__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f->leave($__internal_2d1284f93361a1f546af12165670f49fa0fee7ec8b6dfc3f15e456d0eeb40e5f_prof);
+        $__internal_2a53005e31bffac567a8daf3136da5deff5fb1007a6327de783b870fec5e7f1b->leave($__internal_2a53005e31bffac567a8daf3136da5deff5fb1007a6327de783b870fec5e7f1b_prof);
 
     }
 
@@ -249,11 +244,6 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
         if (index == 0) {
             addTicket(\$container);
-        } else {
-            // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-            \$container.children('div').each(function() {
-                addDeleteLink(\$(this));
-            });
         }
 
         // La fonction qui ajoute un formulaire CategoryType
@@ -270,7 +260,9 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
             var \$prototype = \$(template);
 
             // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-            addDeleteLink(\$prototype);
+            if (index != 0) {
+                addDeleteLink(\$prototype);
+            }
 
             // On ajoute le prototype modifié à la fin de la balise <div>
             \$container.append(\$prototype);
@@ -283,10 +275,8 @@ class __TwigTemplate_a5648076c62305637e934930b6706162d030fd086752f02aa3e2dac7104
         function addDeleteLink(\$prototype) {
             // Création du lien
             var \$deleteLink = \$('<a href=\"#\" class=\"btn btn-danger\">Supprimer</a>');
-
             // Ajout du lien
             \$prototype.append(\$deleteLink);
-
             // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
             \$deleteLink.click(function(e) {
                 \$prototype.remove();

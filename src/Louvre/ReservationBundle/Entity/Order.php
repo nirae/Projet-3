@@ -6,6 +6,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Louvre\ReservationBundle\Validator\AntiBookingHoliday;
+use Louvre\ReservationBundle\Validator\AntiBookingClosedDay;
+use Louvre\ReservationBundle\Validator\AntiBookingPastDay;
 
 /**
  * @ORM\Table(name="order")
@@ -22,7 +25,7 @@ class Order {
 
     /**
      * @ORM\Column(name="date", type="datetime")
-     * @Assert\DateTime
+     * @Assert\DateTime()
      */
     private $date;
 
@@ -33,16 +36,22 @@ class Order {
 
     /**
      * @ORM\Column(name="day_visit", type="datetime")
+     * @Assert\DateTime()
+     * @AntiBookingHoliday()
+     * @AntiBookingClosedDay()
+     * @AntiBookingPastDay()
      */
     private $dayVisit;
 
     /**
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
     /**
-     * @ORM\Column(name="hald_day", type="boolean")
+     * @ORM\Column(name="half_day", type="boolean")
+     * @Assert\Type("bool")
      */
     private $halfDay = false;
 
@@ -64,10 +73,13 @@ class Order {
     // Constructeur
     public function __construct()
     {
-        // ToDo: Générer le numéro de commande
+        // Génère la date de commande
         $this->date = new \Datetime();
+        // Préremplie la date de réservation avec la date actuelle
         $this->dayVisit = new \Datetime();
         $this->tickets = new ArrayCollection();
+        // Génère le numéro de commande
+        $this->orderNumber = uniqid('CMD_');
     }
 
     /**
@@ -282,5 +294,23 @@ class Order {
     public function getEmail()
     {
         return $this->email;
+    }
+
+    // Validation
+    // Pas de billets demi-journée pour le jour meme si 14h passé
+    /**
+     * @Assert\IsTrue(message = "Il n'est pas possible de réserver un billet demi-journée pour le jour même une fois 14h passée")
+     */
+    public function isHalfDayValid()
+    {
+        $dayVisit = date('d/m/Y', $this->dayVisit->getTimestamp());
+        $hourToday = date('H');
+        $today = date('d/m/Y');
+
+        if ($this->halfDay == true && $today == $dayVisit) {
+            if (intval($hourToday) >= 14) {
+                return false;
+            }
+        }
     }
 }

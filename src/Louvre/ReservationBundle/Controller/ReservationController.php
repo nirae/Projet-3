@@ -48,7 +48,7 @@ class ReservationController extends Controller
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
             // Test d'affichage
-            'email' => $order->getEmail(),
+            'order' => $order,
             'dayVisit' => date('d/m/Y', $order->getDayVisit()->getTimestamp()),
         ));
     }

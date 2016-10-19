@@ -53,11 +53,6 @@
         // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
         if (index == 0) {
             addTicket($container);
-        } else {
-            // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-            $container.children('div').each(function() {
-                addDeleteLink($(this));
-            });
         }
 
         // La fonction qui ajoute un formulaire CategoryType
@@ -74,7 +69,9 @@
             var $prototype = $(template);
 
             // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-            addDeleteLink($prototype);
+            if (index != 0) {
+                addDeleteLink($prototype);
+            }
 
             // On ajoute le prototype modifié à la fin de la balise <div>
             $container.append($prototype);
@@ -87,10 +84,8 @@
         function addDeleteLink($prototype) {
             // Création du lien
             var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-
             // Ajout du lien
             $prototype.append($deleteLink);
-
             // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
             $deleteLink.click(function(e) {
                 $prototype.remove();
