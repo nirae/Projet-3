@@ -45,7 +45,7 @@ class ReservationController extends Controller
         $session = $request->getSession();
         $order = $session->get('order');
         // Récuperer le token stripe via Ajax
-         if ($request->isMethod('POST')) {
+         if ($request->isXmlHttpRequest()) {
             //$token = $request->get('tokenValid');
             $this->addFlash('notice', 'Recu');
          }
