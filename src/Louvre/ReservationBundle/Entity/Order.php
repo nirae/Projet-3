@@ -58,7 +58,7 @@ class Order {
     /**
      * @ORM\Column(name="total", type="integer")
      */
-    private $total;
+    private $total = 0;
 
     /**
      * @ORM\Column(name="stripe_token", type="string", length=255)
@@ -311,6 +311,14 @@ class Order {
             if (intval($hourToday) >= 14) {
                 return false;
             }
+        }
+    }
+
+    public function addTotal($tickets)
+    {
+        // Pour chaque ticket on ajoute le prix au total
+        foreach ($tickets as $ticket) {
+            $this->total += $ticket->getTicketPrice();
         }
     }
 }

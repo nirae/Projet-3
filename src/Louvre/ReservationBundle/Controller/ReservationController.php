@@ -4,7 +4,9 @@ namespace Louvre\ReservationBundle\Controller;
 
 use Louvre\ReservationBundle\Entity\Order;
 use Louvre\ReservationBundle\Entity\Ticket;
+use Louvre\ReservationBundle\Entity\Booking;
 use Louvre\ReservationBundle\Form\OrderType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,13 +14,20 @@ use Symfony\Component\HttpFoundation\Response;
 class ReservationController extends Controller
 {
     public function indexAction(Request $request) {
-
+        $booking = new Booking();
         $order = new Order();
         $form = $this->get('form.factory')->create(OrderType::class, $order);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            // Calcul tarifs + validation des critères
-            // + hydratation entité
+
+            /* // Validation pas plus de 1000 places
+            // Enregistrement de la date et du nb de places dans l'entité de gestion de reservation
+            $booking->setDate($order->getDayVisit());
+            $booking->setNbTickets(count($order->getTickets()));
+            // persist et flush de booking
+            */
+            // Calcul et ajout du prix total
+            $order->addTotal($order->getTickets());
             // L'objet hydraté par le formulaire est mis dans la session
             $session = $request->getSession();
             $session->set('order', $order);
@@ -35,10 +44,10 @@ class ReservationController extends Controller
 
         $session = $request->getSession();
         $order = $session->get('order');
-
         // Récuperer le token stripe via Ajax
-         if ($request->isXmlHttpRequest()) {
-
+         if ($request->isMethod('POST')) {
+            //$token = $request->get('tokenValid');
+            $this->addFlash('notice', 'Recu');
          }
 
         // Si le token a été reçu, on envoi un email

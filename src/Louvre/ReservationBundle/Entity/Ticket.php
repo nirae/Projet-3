@@ -3,6 +3,8 @@
 namespace Louvre\ReservationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="ticket")
@@ -47,7 +49,7 @@ class Ticket {
      * @ORM\Column(name="reduced_price", type="boolean")
      * @Assert\Type("bool")
      */
-    private $reducedPrice = false;
+    private $reducedPrice;
 
     /**
      * @ORM\Column(name="ticket_price", type="integer")
@@ -131,10 +133,10 @@ class Ticket {
         // Calcul de l'age
         $age = $this->calculAge($birthDate);
         // Calcul du tarif
-        $prix = $this->calculPrice($age, $this->reducedPrice);
+        $prix = $this->calculPrice($age, $this->getReducedPrice());
         // Remplissage du tarif
         $this->setTicketPrice($prix);
-        
+
         return $this;
     }
 
@@ -268,7 +270,7 @@ class Ticket {
     }
 
     // Calcul du tarif
-    public function calculPrice($age, $reducedPrice = false) {
+    private function calculPrice($age, $reducedPrice) {
         $price = 16;
 
         if ($age < 4) {
@@ -277,6 +279,10 @@ class Ticket {
             $price = 8;
         } elseif ($age > 60) {
             $price = 12;
+        }
+
+        if ($reducedPrice == true) {
+            $price = $price - 10;
         }
 
         return $price;
