@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
+use Louvre\ReservationBundle\Validator\AntiThousandBooking;
 use Louvre\ReservationBundle\Validator\AntiBookingHoliday;
 use Louvre\ReservationBundle\Validator\AntiBookingClosedDay;
 use Louvre\ReservationBundle\Validator\AntiBookingPastDay;
@@ -40,6 +41,7 @@ class Order {
      * @AntiBookingHoliday()
      * @AntiBookingClosedDay()
      * @AntiBookingPastDay()
+     * @AntiThousandBooking()
      */
     private $dayVisit;
 

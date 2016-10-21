@@ -15,8 +15,8 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_12c5118d1d591e32c70f8510134429280c7ee25afe13246bb8c5c6dccadd7e0d = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_12c5118d1d591e32c70f8510134429280c7ee25afe13246bb8c5c6dccadd7e0d->enter($__internal_12c5118d1d591e32c70f8510134429280c7ee25afe13246bb8c5c6dccadd7e0d_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
+        $__internal_a052b759af2d49b6f6278fbd63fbc6cfc1079155344794804f30c2bd12fe799b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_a052b759af2d49b6f6278fbd63fbc6cfc1079155344794804f30c2bd12fe799b->enter($__internal_a052b759af2d49b6f6278fbd63fbc6cfc1079155344794804f30c2bd12fe799b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "LouvreReservationBundle:Reservation:recapitulatif.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -41,40 +41,31 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['message'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 10
-        echo "        ";
-        if (array_key_exists("test", $context)) {
-            // line 11
-            echo "            ";
-            echo twig_escape_filter($this->env, (isset($context["test"]) ? $context["test"] : $this->getContext($context, "test")), "html", null, true);
-            echo "
-        ";
-        }
-        // line 13
         echo "    </div>
     Recap
     <div class=\"\">
         Email : ";
-        // line 16
+        // line 13
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["order"]) ? $context["order"] : $this->getContext($context, "order")), "email", array()), "html", null, true);
         echo "
     </div>
     <div class=\"\">
         Numéro de commande : ";
-        // line 19
+        // line 16
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["order"]) ? $context["order"] : $this->getContext($context, "order")), "orderNumber", array()), "html", null, true);
         echo "
     </div>
 
     ";
-        // line 23
+        // line 20
         echo "    ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["order"]) ? $context["order"] : $this->getContext($context, "order")), "tickets", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["ticket"]) {
-            // line 24
+            // line 21
             echo "    <div class=\"\">
         Prix du billet : ";
-            // line 25
+            // line 22
             echo twig_escape_filter($this->env, $this->getAttribute($context["ticket"], "ticketPrice", array()), "html", null, true);
             echo "
     </div>
@@ -83,19 +74,19 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['ticket'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 28
+        // line 25
         echo "
     <div class=\"total\">
         <p>Total :</p>
         <p id=\"total\">";
-        // line 31
+        // line 28
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["order"]) ? $context["order"] : $this->getContext($context, "order")), "total", array()), "html", null, true);
         echo "</p>
     </div>
 
     <div class=\"\">
         Jour de la visite : ";
-        // line 35
+        // line 32
         echo twig_escape_filter($this->env, (isset($context["dayVisit"]) ? $context["dayVisit"] : $this->getContext($context, "dayVisit")), "html", null, true);
         echo "
     </div>
@@ -105,10 +96,6 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
     <script src=\"https://checkout.stripe.com/checkout.js\"></script>
     <script type=\"text/javascript\">
 
-    // Récupération du total
-    var total = document.querySelector(\"#total\").textContent;
-    total = parseInt(total, 10);
-
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -116,14 +103,16 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            var tokenValid = {
-                id: token.id
-            };
+
             ajaxPost('";
-        // line 57
-        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getUrl("recapitulatif");
-        echo "', tokenValid, function(reponse) {
+        // line 48
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getUrl("ajax-post");
+        echo "', {id: token.id}, function(reponse) {
                 console.log(\"Token envoyé\");
+                response = JSON.parse(reponse);
+                if (response.code == 1) {
+                    console.log(\"Recu!\");
+                }
             });
         }
     });
@@ -135,7 +124,10 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
             description: 'Réservation',
             zipCode: true,
             currency: 'eur',
-            amount: total * 100
+            amount: ";
+        // line 65
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["order"]) ? $context["order"] : $this->getContext($context, "order")), "total", array()), "html", null, true);
+        echo " * 100
         });
         e.preventDefault();
     });
@@ -176,7 +168,7 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 </html>
 ";
         
-        $__internal_12c5118d1d591e32c70f8510134429280c7ee25afe13246bb8c5c6dccadd7e0d->leave($__internal_12c5118d1d591e32c70f8510134429280c7ee25afe13246bb8c5c6dccadd7e0d_prof);
+        $__internal_a052b759af2d49b6f6278fbd63fbc6cfc1079155344794804f30c2bd12fe799b->leave($__internal_a052b759af2d49b6f6278fbd63fbc6cfc1079155344794804f30c2bd12fe799b_prof);
 
     }
 
@@ -192,7 +184,7 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
 
     public function getDebugInfo()
     {
-        return array (  124 => 57,  99 => 35,  92 => 31,  87 => 28,  78 => 25,  75 => 24,  70 => 23,  64 => 19,  58 => 16,  53 => 13,  47 => 11,  44 => 10,  35 => 7,  32 => 6,  28 => 5,  22 => 1,);
+        return array (  129 => 65,  109 => 48,  90 => 32,  83 => 28,  78 => 25,  69 => 22,  66 => 21,  61 => 20,  55 => 16,  49 => 13,  44 => 10,  35 => 7,  32 => 6,  28 => 5,  22 => 1,);
     }
 
     public function getSource()
@@ -206,9 +198,6 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
             Message flash : {{ message }}
         </p>
         {% endfor %}
-        {% if test is defined %}
-            {{ test }}
-        {% endif %}
     </div>
     Recap
     <div class=\"\">
@@ -239,10 +228,6 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
     <script src=\"https://checkout.stripe.com/checkout.js\"></script>
     <script type=\"text/javascript\">
 
-    // Récupération du total
-    var total = document.querySelector(\"#total\").textContent;
-    total = parseInt(total, 10);
-
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -250,11 +235,13 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            var tokenValid = {
-                id: token.id
-            };
-            ajaxPost('{{ url('recapitulatif') }}', tokenValid, function(reponse) {
+
+            ajaxPost('{{ url('ajax-post') }}', {id: token.id}, function(reponse) {
                 console.log(\"Token envoyé\");
+                response = JSON.parse(reponse);
+                if (response.code == 1) {
+                    console.log(\"Recu!\");
+                }
             });
         }
     });
@@ -266,7 +253,7 @@ class __TwigTemplate_6667a03182ed73854e75ca6edd25de622a3a4dbbef469df0996cebcc780
             description: 'Réservation',
             zipCode: true,
             currency: 'eur',
-            amount: total * 100
+            amount: {{ order.total }} * 100
         });
         e.preventDefault();
     });

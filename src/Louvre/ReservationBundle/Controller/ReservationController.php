@@ -20,12 +20,6 @@ class ReservationController extends Controller
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-            /* // Validation pas plus de 1000 places
-            // Enregistrement de la date et du nb de places dans l'entité de gestion de reservation
-            $booking->setDate($order->getDayVisit());
-            $booking->setNbTickets(count($order->getTickets()));
-            // persist et flush de booking
-            */
             // Calcul et ajout du prix total
             $order->addTotal($order->getTickets());
             // L'objet hydraté par le formulaire est mis dans la session
@@ -44,11 +38,20 @@ class ReservationController extends Controller
 
         $session = $request->getSession();
         $order = $session->get('order');
-        // Récuperer le token stripe via Ajax
-         if ($request->isXmlHttpRequest()) {
-            //$token = $request->get('tokenValid');
-            $this->addFlash('notice', 'Recu');
-         }
+
+        // Si le token est dans la session
+        if ($session->get('token')) {
+            // Recupere le token et hydrate l'entité
+            $token = $session->get('token');
+            $order->setStripeToken($token);
+
+            // persist et flush
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($order);
+            $em->flush();
+            // ToDo : email
+            
+        }
 
         // Si le token a été reçu, on envoi un email
         // et on flush la commande
@@ -56,7 +59,7 @@ class ReservationController extends Controller
 
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
-            // Test d'affichage
+            // Test front
             'order' => $order,
             'dayVisit' => date('d/m/Y', $order->getDayVisit()->getTimestamp()),
         ));
@@ -64,5 +67,16 @@ class ReservationController extends Controller
 
     public function cgvAction() {
         return $this->render('LouvreReservationBundle:Reservation:cgv.html.twig');
+    }
+
+    public function ajaxPostAction(Request $request) {
+        // Récuperer le token stripe via Ajax
+        $token = $request->get('id');
+
+        $session = $request->getSession();
+        $session->set('token', $token);
+
+        return $this->json(["code" => 1]);
+
     }
 }

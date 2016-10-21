@@ -37,10 +37,6 @@
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script type="text/javascript">
 
-    // Récupération du total
-    var total = document.querySelector("#total").textContent;
-    total = parseInt(total, 10);
-
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
@@ -48,11 +44,13 @@
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            var tokenValid = {
-                id: token.id
-            };
-            ajaxPost('{{ url('recapitulatif') }}', tokenValid, function(reponse) {
+
+            ajaxPost('{{ url('ajax-post') }}', {id: token.id}, function(reponse) {
                 console.log("Token envoyé");
+                response = JSON.parse(reponse);
+                if (response.code == 1) {
+                    console.log("Recu!");
+                }
             });
         }
     });
@@ -64,7 +62,7 @@
             description: 'Réservation',
             zipCode: true,
             currency: 'eur',
-            amount: total * 100
+            amount: {{ order.total }} * 100
         });
         e.preventDefault();
     });

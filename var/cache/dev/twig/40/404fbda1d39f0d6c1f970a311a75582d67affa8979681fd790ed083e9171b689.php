@@ -15,8 +15,8 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_1fe933bf5df24c305ef5c70e89baafd6a061fc61e2b4d09d99122ff3e0f4d108 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_1fe933bf5df24c305ef5c70e89baafd6a061fc61e2b4d09d99122ff3e0f4d108->enter($__internal_1fe933bf5df24c305ef5c70e89baafd6a061fc61e2b4d09d99122ff3e0f4d108_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@LouvreReservation/Reservation/recapitulatif.html.twig"));
+        $__internal_989db2ffd6fc9e1ebd90b765a23ff274b10782971762bdc5dd120ce186234633 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_989db2ffd6fc9e1ebd90b765a23ff274b10782971762bdc5dd120ce186234633->enter($__internal_989db2ffd6fc9e1ebd90b765a23ff274b10782971762bdc5dd120ce186234633_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "@LouvreReservation/Reservation/recapitulatif.html.twig"));
 
         // line 1
         echo "<!DOCTYPE html>
@@ -29,12 +29,12 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
         $context['_seq'] = twig_ensure_traversable($this->getAttribute($this->getAttribute($this->getAttribute((isset($context["app"]) ? $context["app"] : $this->getContext($context, "app")), "session", array()), "flashbag", array()), "get", array(0 => "notice"), "method"));
         foreach ($context['_seq'] as $context["_key"] => $context["message"]) {
             // line 6
-            echo "            <p>
-                Message flash : ";
+            echo "        <p>
+            Message flash : ";
             // line 7
             echo twig_escape_filter($this->env, $context["message"], "html", null, true);
             echo "
-            </p>
+        </p>
         ";
         }
         $_parent = $context['_parent'];
@@ -97,8 +97,8 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
     <script type=\"text/javascript\">
 
     // Récupération du total
-    let total = document.querySelector(\"#total\").textContent
-    total = parseInt(total, 10)
+    var total = document.querySelector(\"#total\").textContent;
+    total = parseInt(total, 10);
 
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
@@ -107,14 +107,18 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            let tokenId = new FormData()
-            tokenId.append('token', token.id)
-            ajaxPost(";
-        // line 53
-        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getUrl("recapitulatif");
-        echo ", tokenId, function(reponse) {
-                console.log(\"Token envoyé\")
-            })
+            var tokenValid = {
+                id: token.id
+            };
+            ajaxPost('";
+        // line 54
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getUrl("ajax-post");
+        echo "', tokenValid, function(reponse) {
+                console.log(\"Token envoyé\");
+                if (response.code == 100 && response.success == true) {
+                    console.log(\"recu!\");
+                }
+            });
         }
     });
 
@@ -136,7 +140,10 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
     });
 
     //Fonction Ajax
-    function ajaxPost(url, data, callback) {
+    // Exécute un appel AJAX POST
+    // Prend en paramètres l'URL cible, la donnée à envoyer et la fonction callback appelée en cas de succès
+    // Le paramètre isJson permet d'indiquer si l'envoi concerne des données JSON
+    function ajaxPost(url, data, callback, isJson = true) {
         var req = new XMLHttpRequest();
         req.open(\"POST\", url);
         req.addEventListener(\"load\", function () {
@@ -150,6 +157,12 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
         req.addEventListener(\"error\", function () {
             console.error(\"Erreur réseau avec l'URL \" + url);
         });
+        if (isJson) {
+            // Définit le contenu de la requête comme étant du JSON
+            req.setRequestHeader(\"Content-Type\", \"application/json\");
+            // Transforme la donnée du format JSON vers le format texte avant l'envoi
+            data = JSON.stringify(data);
+        }
         req.send(data);
     }
     </script>
@@ -157,7 +170,7 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
 </html>
 ";
         
-        $__internal_1fe933bf5df24c305ef5c70e89baafd6a061fc61e2b4d09d99122ff3e0f4d108->leave($__internal_1fe933bf5df24c305ef5c70e89baafd6a061fc61e2b4d09d99122ff3e0f4d108_prof);
+        $__internal_989db2ffd6fc9e1ebd90b765a23ff274b10782971762bdc5dd120ce186234633->leave($__internal_989db2ffd6fc9e1ebd90b765a23ff274b10782971762bdc5dd120ce186234633_prof);
 
     }
 
@@ -173,7 +186,7 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
 
     public function getDebugInfo()
     {
-        return array (  114 => 53,  90 => 32,  83 => 28,  78 => 25,  69 => 22,  66 => 21,  61 => 20,  55 => 16,  49 => 13,  44 => 10,  35 => 7,  32 => 6,  28 => 5,  22 => 1,);
+        return array (  115 => 54,  90 => 32,  83 => 28,  78 => 25,  69 => 22,  66 => 21,  61 => 20,  55 => 16,  49 => 13,  44 => 10,  35 => 7,  32 => 6,  28 => 5,  22 => 1,);
     }
 
     public function getSource()
@@ -183,9 +196,9 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
 <body>
     <div class=\"\">
         {% for message in app.session.flashbag.get('notice') %}
-            <p>
-                Message flash : {{ message }}
-            </p>
+        <p>
+            Message flash : {{ message }}
+        </p>
         {% endfor %}
     </div>
     Recap
@@ -218,8 +231,8 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
     <script type=\"text/javascript\">
 
     // Récupération du total
-    let total = document.querySelector(\"#total\").textContent
-    total = parseInt(total, 10)
+    var total = document.querySelector(\"#total\").textContent;
+    total = parseInt(total, 10);
 
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
@@ -228,11 +241,15 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            let tokenId = new FormData()
-            tokenId.append('token', token.id)
-            ajaxPost({{ url('recapitulatif') }}, tokenId, function(reponse) {
-                console.log(\"Token envoyé\")
-            })
+            var tokenValid = {
+                id: token.id
+            };
+            ajaxPost('{{ url('ajax-post') }}', tokenValid, function(reponse) {
+                console.log(\"Token envoyé\");
+                if (response.code == 100 && response.success == true) {
+                    console.log(\"recu!\");
+                }
+            });
         }
     });
 
@@ -254,7 +271,10 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
     });
 
     //Fonction Ajax
-    function ajaxPost(url, data, callback) {
+    // Exécute un appel AJAX POST
+    // Prend en paramètres l'URL cible, la donnée à envoyer et la fonction callback appelée en cas de succès
+    // Le paramètre isJson permet d'indiquer si l'envoi concerne des données JSON
+    function ajaxPost(url, data, callback, isJson = true) {
         var req = new XMLHttpRequest();
         req.open(\"POST\", url);
         req.addEventListener(\"load\", function () {
@@ -268,6 +288,12 @@ class __TwigTemplate_f9a6e7252e3e3e9eaad06de784e75b614dc8b59f58438a1ea9363f2ed31
         req.addEventListener(\"error\", function () {
             console.error(\"Erreur réseau avec l'URL \" + url);
         });
+        if (isJson) {
+            // Définit le contenu de la requête comme étant du JSON
+            req.setRequestHeader(\"Content-Type\", \"application/json\");
+            // Transforme la donnée du format JSON vers le format texte avant l'envoi
+            data = JSON.stringify(data);
+        }
         req.send(data);
     }
     </script>

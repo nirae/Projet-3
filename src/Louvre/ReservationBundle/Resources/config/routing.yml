@@ -9,3 +9,7 @@ recapitulatif:
 cgv:
     path:   /conditions-generales
     defaults: { _controller: LouvreReservationBundle:Reservation:cgv }
+
+ajax-post:
+    path:   /ajax-post
+    defaults: { _controller: LouvreReservationBundle:Reservation:ajaxPost }

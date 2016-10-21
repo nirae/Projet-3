@@ -119,6 +119,11 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
             return array (  '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::cgvAction',  '_route' => 'cgv',);
         }
 
+        // ajax-post
+        if ($pathinfo === '/ajax-post') {
+            return array (  '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::ajaxPostAction',  '_route' => 'ajax-post',);
+        }
+
         throw 0 < count($allow) ? new MethodNotAllowedException(array_unique($allow)) : new ResourceNotFoundException();
     }
 }

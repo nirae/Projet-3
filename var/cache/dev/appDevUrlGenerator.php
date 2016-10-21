@@ -38,6 +38,7 @@ class appDevUrlGenerator extends Symfony\Component\Routing\Generator\UrlGenerato
         'reservation_homepage' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::indexAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'recapitulatif' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::recapAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/recapitulatif',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
         'cgv' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::cgvAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/conditions-generales',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
+        'ajax-post' => array (  0 =>   array (  ),  1 =>   array (    '_controller' => 'Louvre\\ReservationBundle\\Controller\\ReservationController::ajaxPostAction',  ),  2 =>   array (  ),  3 =>   array (    0 =>     array (      0 => 'text',      1 => '/ajax-post',    ),  ),  4 =>   array (  ),  5 =>   array (  ),),
     );
         }
     }

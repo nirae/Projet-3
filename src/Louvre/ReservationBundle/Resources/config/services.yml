@@ -1,4 +1,6 @@
 services:
-#    louvre_reservation.example:
-#        class: Louvre\ReservationBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    louvre_reservation.validator.antithousandbooking:
+        class: Louvre\ReservationBundle\Validator\AntiThousandBookingValidator
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: validator.constraint_validator, alias: anti_thousand_booking }
