@@ -12,7 +12,7 @@ use Louvre\ReservationBundle\Validator\AntiBookingClosedDay;
 use Louvre\ReservationBundle\Validator\AntiBookingPastDay;
 
 /**
- * @ORM\Table(name="order")
+ * @ORM\Table(name="order_louvre")
  * @ORM\Entity
  */
 class Order {
@@ -25,7 +25,7 @@ class Order {
     private $id;
 
     /**
-     * @ORM\Column(name="date", type="datetime")
+     * @ORM\Column(name="booking_date", type="datetime")
      * @Assert\DateTime()
      */
     private $date;
@@ -53,7 +53,6 @@ class Order {
 
     /**
      * @ORM\Column(name="half_day", type="boolean")
-     * @Assert\Type("bool")
      */
     private $halfDay = false;
 
@@ -63,12 +62,12 @@ class Order {
     private $total = 0;
 
     /**
-     * @ORM\Column(name="stripe_token", type="string", length=255)
+     * @ORM\Column(name="token", type="string", length=255)
      */
     private $stripeToken;
 
     /**
-     * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order", cascade={"persist"})
      */
     private $tickets;
 
@@ -249,7 +248,7 @@ class Order {
     {
         $this->tickets[] = $ticket;
 
-        $tickets->setOrder($this);
+        //$ticket->setOrder($this);
 
         return $this;
     }

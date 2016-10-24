@@ -23,7 +23,9 @@ class TicketType extends AbstractType
             ->add('reducedPrice', CheckboxType::class, array('required' => false))
             ->add('birthDate', BirthdayType::class, array(
                 'placeholder' => array(
-                    'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
+                    'year' => 'Année',
+                    'month' => 'Mois',
+                    'day' => 'Jour'
                 ),
                 'format' => 'dd-MM-yyyy',
             ))

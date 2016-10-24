@@ -19,7 +19,11 @@ class ReservationController extends Controller
         $form = $this->get('form.factory')->create(OrderType::class, $order);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-
+            // Ne devrait pas avoir besoin de le faire
+            $tickets = $order->getTickets();
+            foreach ($tickets as $ticket) {
+                $ticket->setOrder($order);
+            }
             // Calcul et ajout du prix total
             $order->addTotal($order->getTickets());
             // L'objet hydraté par le formulaire est mis dans la session
@@ -39,24 +43,20 @@ class ReservationController extends Controller
         $session = $request->getSession();
         $order = $session->get('order');
 
-        // Si le token est dans la session
-        if ($session->get('token')) {
-            // Recupere le token et hydrate l'entité
-            $token = $session->get('token');
-            $order->setStripeToken($token);
+        dump($order);
 
+        if ($request->isMethod('POST')) {
+            // Récuperer le token stripe via Ajax
+            $tokenId = $request->request->all();
+            $token = $tokenId['id'];
+            $order->setStripeToken($token);
             // persist et flush
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
+            return $this->json(["code" => 1, "token" => $token]);
             // ToDo : email
-            
         }
-
-        // Si le token a été reçu, on envoi un email
-        // et on flush la commande
-        // Et envoi d'un message flash de remerciement
-
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
             // Test front
@@ -71,12 +71,17 @@ class ReservationController extends Controller
 
     public function ajaxPostAction(Request $request) {
         // Récuperer le token stripe via Ajax
-        $token = $request->get('id');
+        $tokenId = $request->request->all();
+        $token = $tokenId['id'];
 
-        $session = $request->getSession();
-        $session->set('token', $token);
+        //$session = $request->getSession();
+        //$order = $session->get('order');
+        //$order->setStripeToken($token['id']);
 
-        return $this->json(["code" => 1]);
+        //$em = $this->getDoctrine()->getManager();
+        //$em->persist($order);
+        //$em->flush();
 
+        return $this->json(["code" => 1, "token" => $token]);
     }
 }

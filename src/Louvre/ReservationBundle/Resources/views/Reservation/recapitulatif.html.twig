@@ -15,6 +15,9 @@
     <div class="">
         Numéro de commande : {{ order.orderNumber }}
     </div>
+    <div class="">
+        Demi-Journée : {{ order.halfDay }}        
+    </div>
 
     {# test affichage #}
     {% for ticket in order.tickets %}
@@ -34,6 +37,7 @@
 
     <button type="button" id="bouton" name="StripeButton">Payer</button>
 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script type="text/javascript">
 
@@ -44,60 +48,70 @@
         token: function(token) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-
+            $.post('{{ url('recapitulatif') }}',
+                {id: token.id },
+                function(reponse){
+                    console.log("Token envoyé");
+                    if (reponse.code == 1) {
+                        console.log("Recu!");
+                        console.log(reponse.token);
+                    }
+                }, "json");
+            /*
             ajaxPost('{{ url('ajax-post') }}', {id: token.id}, function(reponse) {
-                console.log("Token envoyé");
-                response = JSON.parse(reponse);
-                if (response.code == 1) {
-                    console.log("Recu!");
-                }
-            });
-        }
-    });
-
-    document.getElementById('bouton').addEventListener('click', function(e) {
-        // Open Checkout with further options:
-        handler.open({
-            name: 'Musée du Louvre',
-            description: 'Réservation',
-            zipCode: true,
-            currency: 'eur',
-            amount: {{ order.total }} * 100
-        });
-        e.preventDefault();
-    });
-
-    // Close Checkout on page navigation:
-    window.addEventListener('popstate', function() {
-        handler.close();
-    });
-
-    //Fonction Ajax
-    // Exécute un appel AJAX POST
-    // Prend en paramètres l'URL cible, la donnée à envoyer et la fonction callback appelée en cas de succès
-    // Le paramètre isJson permet d'indiquer si l'envoi concerne des données JSON
-    function ajaxPost(url, data, callback, isJson = true) {
-        var req = new XMLHttpRequest();
-        req.open("POST", url);
-        req.addEventListener("load", function () {
-            if (req.status >= 200 && req.status < 400) {
-                // Appelle la fonction callback en lui passant la réponse de la requête
-                callback(req.responseText);
-            } else {
-                console.error(req.status + " " + req.statusText + " " + url);
-            }
-        });
-        req.addEventListener("error", function () {
-            console.error("Erreur réseau avec l'URL " + url);
-        });
-        if (isJson) {
-            // Définit le contenu de la requête comme étant du JSON
-            req.setRequestHeader("Content-Type", "application/json");
-            // Transforme la donnée du format JSON vers le format texte avant l'envoi
-            data = JSON.stringify(data);
-        }
-        req.send(data);
+            console.log("Token envoyé");
+            //response = JSON.parse(reponse);
+            console.log(reponse);
+            /*if (response.code == 1) {
+            console.log("Recu!");
+        }*/
+        //});
     }
-    </script>
+});
+
+document.getElementById('bouton').addEventListener('click', function(e) {
+    // Open Checkout with further options:
+    handler.open({
+        name: 'Musée du Louvre',
+        description: 'Réservation',
+        zipCode: true,
+        currency: 'eur',
+        amount: {{ order.total }} * 100
+    });
+    e.preventDefault();
+});
+
+// Close Checkout on page navigation:
+window.addEventListener('popstate', function() {
+    handler.close();
+});
+
+//Fonction Ajax
+// Exécute un appel AJAX POST
+// Prend en paramètres l'URL cible, la donnée à envoyer et la fonction callback appelée en cas de succès
+// Le paramètre isJson permet d'indiquer si l'envoi concerne des données JSON
+function ajaxPost(url, data, callback, isJson = true) {
+    var req = new XMLHttpRequest();
+    req.open("POST", url);
+    req.addEventListener("load", function () {
+        if (req.status >= 200 && req.status < 400) {
+            // Appelle la fonction callback en lui passant la réponse de la requête
+            callback(req.responseText);
+        } else {
+            console.error(req.status + " " + req.statusText + " " + url);
+        }
+    });
+    req.addEventListener("error", function () {
+        console.error("Erreur réseau avec l'URL " + url);
+    });
+    if (isJson) {
+        // Définit le contenu de la requête comme étant du JSON
+        req.setRequestHeader("Content-Type", "application/json");
+        // Transforme la donnée du format JSON vers le format texte avant l'envoi
+        data = JSON.stringify(data);
+    }
+    req.send(data);
+}
+</script>
 </body>
 </html>

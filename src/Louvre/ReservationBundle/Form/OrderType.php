@@ -25,7 +25,9 @@ class OrderType extends AbstractType
                 'format' => 'dd-MM-yyyy',
                 'years' => range(date('Y'), date('Y') + 1),
             ))
-            ->add('halfDay', CheckboxType::class, array('required' => false))
+            ->add('halfDay', CheckboxType::class, array(
+                'required' => false
+            ))
             ->add('email', EmailType::class)
             ->add('tickets', CollectionType::class, array(
                 'entry_type' => TicketType::class,

@@ -20,14 +20,14 @@ class Ticket {
     private $id;
 
     /**
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="booking_name", type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Type("string")
      */
     private $name;
 
     /**
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @ORM\Column(name="booking_first_name", type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Type("string")
      */
@@ -133,7 +133,7 @@ class Ticket {
         // Calcul de l'age
         $age = $this->calculAge($birthDate);
         // Calcul du tarif
-        $prix = $this->calculPrice($age, $this->getReducedPrice());
+        $prix = $this->calculPrice($age, $this->reducedPrice);
         // Remplissage du tarif
         $this->setTicketPrice($prix);
 
@@ -270,7 +270,7 @@ class Ticket {
     }
 
     // Calcul du tarif
-    private function calculPrice($age, $reducedPrice) {
+    private function calculPrice($age, $reducedPrice, $halfDay = false) {
         $price = 16;
 
         if ($age < 4) {
@@ -279,6 +279,10 @@ class Ticket {
             $price = 8;
         } elseif ($age > 60) {
             $price = 12;
+        }
+
+        if ($halfDay == true) {
+            $price = $price / 2;
         }
 
         if ($reducedPrice == true) {
