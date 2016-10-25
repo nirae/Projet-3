@@ -55,7 +55,8 @@ class ReservationController extends Controller
             $em->persist($order);
             $em->flush();
             return $this->json(["code" => 1, "token" => $token]);
-            // ToDo : email
+            // email
+
         }
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
