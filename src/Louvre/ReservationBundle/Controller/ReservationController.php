@@ -43,8 +43,6 @@ class ReservationController extends Controller
         $session = $request->getSession();
         $order = $session->get('order');
 
-        dump($order);
-
         if ($request->isMethod('POST')) {
             // Récuperer le token stripe via Ajax
             $tokenId = $request->request->all();
