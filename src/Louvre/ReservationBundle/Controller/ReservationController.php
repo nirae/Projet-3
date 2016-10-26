@@ -50,13 +50,23 @@ class ReservationController extends Controller
             $tokenId = $request->request->all();
             $token = $tokenId['id'];
             $order->setStripeToken($token);
-            // persist et flush
+            // Email
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Confirmation de réservation')
+                ->setFrom('ndubouilh@gmail.com')
+                ->setTo($order->getEmail())
+                ->setBody(
+                    $this->render('LouvreReservationBundle:Reservation:email.html.twig', array(
+
+                    ))
+                )
+            ;
+            $this->get('mailer')->send($message);
+            // Persist et flush
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
             $em->flush();
-            return $this->json(["code" => 1, "token" => $token]);
-            // email
-
+            return $this->json(["code" => 1]);
         }
 
         return $this->render('LouvreReservationBundle:Reservation:recapitulatif.html.twig', array(
