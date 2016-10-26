@@ -53,7 +53,7 @@ class ReservationController extends Controller
             // Email
             $message = \Swift_Message::newInstance()
                 ->setSubject('Confirmation de réservation')
-                ->setFrom('ndubouilh@gmail.com')
+                ->setFrom('louvre@nicolasdubouilh.fr')
                 ->setTo($order->getEmail())
                 ->setBody(
                     $this->render('LouvreReservationBundle:Reservation:email.html.twig', array(
