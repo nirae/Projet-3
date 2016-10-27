@@ -2,6 +2,7 @@
 
 namespace Louvre\ReservationBundle\Entity;
 
+use Louvre\ReservationBundle\Entity\Order;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -229,7 +230,7 @@ class Ticket {
      *
      * @return Ticket
      */
-    public function setOrder(\Louvre\ReservationBundle\Entity\Order $order)
+    public function setOrder(Order $order)
     {
         $this->order = $order;
 

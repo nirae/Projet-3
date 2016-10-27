@@ -10,3 +10,6 @@ services:
     louvre_reservation.confirmationmail:
         class: Louvre\ReservationBundle\ConfirmationMailService\ConfirmationMail
         arguments: ["@mailer", "@templating", "%email_louvre%"]
+    louvre_reservation.orderfinalization:
+        class: Louvre\ReservationBundle\OrderFinalizationService\OrderFinalization
+        arguments: ["@doctrine.orm.entity_manager", "@louvre_reservation.confirmationmail"]

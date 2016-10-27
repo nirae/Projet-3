@@ -2,6 +2,7 @@
 
 namespace Louvre\ReservationBundle\Entity;
 
+use Louvre\ReservationBundle\Entity\Ticket;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -69,7 +70,7 @@ class Order {
     /**
      * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order", cascade={"persist"})
      */
-    private $tickets;
+    private $tickets = [];
 
     // Constructeur
     public function __construct()
@@ -244,11 +245,11 @@ class Order {
      *
      * @return Order
      */
-    public function addTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
+    public function addTicket(Ticket $ticket)
     {
-        $this->tickets[] = $ticket;
+        $ticket->setOrder($this);
 
-        //$ticket->setOrder($this);
+        $this->tickets[] = $ticket;
 
         return $this;
     }

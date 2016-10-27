@@ -22,6 +22,7 @@ class ReservationController extends Controller
             foreach ($tickets as $ticket) {
                 $ticket->setOrder($order);
             }
+            // A cause du problème d'en haut
             // Calcul et ajout du prix total
             $order->addTotal($order->getTickets());
             // L'objet hydraté par le formulaire est mis dans la session
@@ -39,17 +40,12 @@ class ReservationController extends Controller
 
         $order = $request->getSession()->get('order');
 
+        dump($order);
+
         if ($request->isMethod('POST')) {
-            // Récuperer le token stripe via Ajax
-            $tokenId = $request->request->all();
-            $token = $tokenId['id'];
-            $order->setStripeToken($token);
-            // Email -> via un service
-            $this->get('louvre_reservation.confirmationmail')->send($order);
-            // Persist et flush
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($order);
-            $em->flush();
+            // Récupère le token envoyé, envoi mail et flush la commande
+            $this->get('louvre_reservation.orderfinalization')->final($request, $order);
+            // Code de retour pour validation en JS
             return $this->json(["code" => 1]);
         }
 
