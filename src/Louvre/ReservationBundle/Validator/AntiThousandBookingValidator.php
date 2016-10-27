@@ -20,21 +20,17 @@ class AntiThousandBookingValidator extends ConstraintValidator
     {
 
         // Récupère les entités avec le meme jour de réservation
-        
         $days = $this->em
             ->getRepository('LouvreReservationBundle:Order')
             ->findBy(array('dayVisit' => $value))
         ;
-
         // Si il n'y a pas d'entités avec le même jour de réservation
         // On arrête tout de suite
         if (empty($days)) {
             return;
         }
-
         // Initialisation du nombre de reservation à 0
         $nbReservations = 0;
-
         // Récupère le nombre de billets pour chaque entité récupérée
         foreach ($days as $day) {
             // Compte le nombre de billets liés
@@ -42,7 +38,7 @@ class AntiThousandBookingValidator extends ConstraintValidator
             // Ajoute ce nombre au total
             $nbReservations += $nbTickets;
         }
-
+        
         if ($nbReservations > 1000) {
             // Déclenche l'erreur
             $this->context->addViolation($constraint->message);

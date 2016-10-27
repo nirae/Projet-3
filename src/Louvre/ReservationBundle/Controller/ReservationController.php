@@ -4,7 +4,6 @@ namespace Louvre\ReservationBundle\Controller;
 
 use Louvre\ReservationBundle\Entity\Order;
 use Louvre\ReservationBundle\Entity\Ticket;
-use Louvre\ReservationBundle\Entity\Booking;
 use Louvre\ReservationBundle\Form\OrderType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,7 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 class ReservationController extends Controller
 {
     public function indexAction(Request $request) {
-        $booking = new Booking();
         $order = new Order();
         $form = $this->get('form.factory')->create(OrderType::class, $order);
 
@@ -27,8 +25,7 @@ class ReservationController extends Controller
             // Calcul et ajout du prix total
             $order->addTotal($order->getTickets());
             // L'objet hydraté par le formulaire est mis dans la session
-            $session = $request->getSession();
-            $session->set('order', $order);
+            $request->getSession()->set('order', $order);
             // Redirige vers la page de recap
             return $this->redirectToRoute('recapitulatif');
         }
@@ -40,26 +37,15 @@ class ReservationController extends Controller
 
     public function recapAction(Request $request) {
 
-        $session = $request->getSession();
-        $order = $session->get('order');
+        $order = $request->getSession()->get('order');
 
         if ($request->isMethod('POST')) {
             // Récuperer le token stripe via Ajax
             $tokenId = $request->request->all();
             $token = $tokenId['id'];
             $order->setStripeToken($token);
-            // Email
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Confirmation de réservation')
-                ->setFrom('louvre@nicolasdubouilh.fr')
-                ->setTo($order->getEmail())
-                ->setBody(
-                    $this->render('LouvreReservationBundle:Reservation:email.html.twig', array(
-
-                    ))
-                )
-            ;
-            $this->get('mailer')->send($message);
+            // Email -> via un service
+            $this->get('louvre_reservation.confirmationmail')->send($order);
             // Persist et flush
             $em = $this->getDoctrine()->getManager();
             $em->persist($order);
@@ -76,21 +62,5 @@ class ReservationController extends Controller
 
     public function cgvAction() {
         return $this->render('LouvreReservationBundle:Reservation:cgv.html.twig');
-    }
-
-    public function ajaxPostAction(Request $request) {
-        // Récuperer le token stripe via Ajax
-        $tokenId = $request->request->all();
-        $token = $tokenId['id'];
-
-        //$session = $request->getSession();
-        //$order = $session->get('order');
-        //$order->setStripeToken($token['id']);
-
-        //$em = $this->getDoctrine()->getManager();
-        //$em->persist($order);
-        //$em->flush();
-
-        return $this->json(["code" => 1, "token" => $token]);
     }
 }
