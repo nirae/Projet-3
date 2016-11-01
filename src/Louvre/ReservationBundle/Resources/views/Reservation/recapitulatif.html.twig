@@ -3,7 +3,7 @@
 <body>
     <div class="">
         {% for message in app.session.flashbag.get('notice') %}
-        <p>
+        <p class="message-flash">
             Message flash : {{ message }}
         </p>
         {% endfor %}
@@ -32,59 +32,50 @@
     </div>
 
     <div class="">
-        Jour de la visite : {{ dayVisit }}
+        Jour de la visite : {{ order.dayVisit|date("d/m/Y") }}
     </div>
 
     <button type="button" id="bouton" name="StripeButton">Payer</button>
 
+    {% block javascripts %}
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <script type="text/javascript">
-
     var handler = StripeCheckout.configure({
         key: 'pk_test_8V7h2SGMHr9hQQSl8AheEc8J',
         image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
         locale: 'auto',
         token: function(token) {
-            // You can access the token ID with `token.id`.
-            // Get the token ID to your server-side code for use.
             $.post('{{ url('recapitulatif') }}',
-                {id: token.id },
-                function(reponse){
-                    console.log("Token envoyé");
-                    if (reponse.code == 1) {
-                        console.log("Recu!");
-                    }
-                }, "json");
-            /*
-            ajaxPost('{{ url('ajax-post') }}', {id: token.id}, function(reponse) {
-            console.log("Token envoyé");
-            //response = JSON.parse(reponse);
-            console.log(reponse);
-            /*if (response.code == 1) {
-            console.log("Recu!");
-        }*/
-        //});
-    }
-});
-
-document.getElementById('bouton').addEventListener('click', function(e) {
-    // Open Checkout with further options:
-    handler.open({
-        name: 'Musée du Louvre',
-        description: 'Réservation',
-        zipCode: true,
-        currency: 'eur',
-        amount: {{ order.total }} * 100
+            {id: token.id },
+            function(reponse){
+                console.log("Token envoyé");
+                if (reponse.code == 1) {
+                    window.location.reload();
+                }
+            }, "json");
+        }
     });
-    e.preventDefault();
-});
 
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
-    handler.close();
-});
+    document.getElementById('bouton').addEventListener('click', function(e) {
+        // Open Checkout with further options:
+        handler.open({
+            name: 'Musée du Louvre',
+            description: 'Réservation',
+            zipCode: true,
+            currency: 'eur',
+            amount: {{ order.total }} * 100
+        });
+        e.preventDefault();
+    });
 
-</script>
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+        handler.close();
+    });
+    </script>
+    {% endblock %}
+
+
 </body>
 </html>

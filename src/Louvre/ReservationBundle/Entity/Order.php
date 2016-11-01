@@ -70,7 +70,7 @@ class Order {
     /**
      * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order", cascade={"persist"})
      */
-    private $tickets = [];
+    private $tickets;
 
     // Constructeur
     public function __construct()
@@ -239,42 +239,6 @@ class Order {
     }
 
     /**
-     * Add ticket
-     *
-     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
-     *
-     * @return Order
-     */
-    public function addTicket(Ticket $ticket)
-    {
-        $ticket->setOrder($this);
-
-        $this->tickets[] = $ticket;
-
-        return $this;
-    }
-
-    /**
-     * Remove ticket
-     *
-     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
-     */
-    public function removeTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
-    {
-        $this->tickets->removeElement($ticket);
-    }
-
-    /**
-     * Get tickets
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getTickets()
-    {
-        return $this->tickets;
-    }
-
-    /**
      * Set email
      *
      * @param string $email
@@ -316,11 +280,44 @@ class Order {
         }
     }
 
-    public function addTotal($tickets)
+    public function addTotal($ticketPrice)
     {
-        // Pour chaque ticket on ajoute le prix au total
-        foreach ($tickets as $ticket) {
-            $this->total += $ticket->getTicketPrice();
-        }
+        $this->total += $ticketPrice;
+
+        return $this;
+    }
+
+    /**
+     * Add ticket
+     *
+     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+     *
+     * @return Order
+     */
+    public function addTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets[] = $ticket;
+
+        return $this;
+    }
+
+    /**
+     * Remove ticket
+     *
+     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+     */
+    public function removeTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
+    {
+        $this->tickets->removeElement($ticket);
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }

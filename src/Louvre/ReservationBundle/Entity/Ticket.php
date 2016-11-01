@@ -59,7 +59,7 @@ class Ticket {
 
     /**
      * @ORM\ManyToOne(targetEntity="Louvre\ReservationBundle\Entity\Order", inversedBy="tickets")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
     private $order;
 
@@ -223,30 +223,6 @@ class Ticket {
         return $this->ticketPrice;
     }
 
-    /**
-     * Set order
-     *
-     * @param \Louvre\ReservationBundle\Entity\Order $order
-     *
-     * @return Ticket
-     */
-    public function setOrder(Order $order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * Get order
-     *
-     * @return \Louvre\ReservationBundle\Entity\Order
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
     // Calcul de l'age
     private function calculAge($birthDate)
     {
@@ -291,5 +267,29 @@ class Ticket {
         }
 
         return $price;
+    }
+
+    /**
+     * Set order
+     *
+     * @param \Louvre\ReservationBundle\Entity\Order $order
+     *
+     * @return Ticket
+     */
+    public function setOrder(\Louvre\ReservationBundle\Entity\Order $order)
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * Get order
+     *
+     * @return \Louvre\ReservationBundle\Entity\Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }

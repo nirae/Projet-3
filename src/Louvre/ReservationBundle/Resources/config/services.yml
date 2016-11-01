@@ -1,15 +1,13 @@
-parameters:
-    email_louvre: louvre@nicolasdubouilh.fr
-
 services:
     louvre_reservation.validator.antithousandbooking:
         class: Louvre\ReservationBundle\Validator\AntiThousandBookingValidator
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: validator.constraint_validator, alias: anti_thousand_booking }
-    louvre_reservation.confirmationmail:
-        class: Louvre\ReservationBundle\ConfirmationMailService\ConfirmationMail
-        arguments: ["@mailer", "@templating", "%email_louvre%"]
-    louvre_reservation.orderfinalization:
-        class: Louvre\ReservationBundle\OrderFinalizationService\OrderFinalization
-        arguments: ["@doctrine.orm.entity_manager", "@louvre_reservation.confirmationmail"]
+    louvre_reservation.bookingmanager:
+        class: Louvre\ReservationBundle\BookingManagerService\BookingManager
+        arguments:
+            - "@mailer"
+            - "@templating"
+            - "@doctrine.orm.entity_manager"
+            - "@form.factory"
