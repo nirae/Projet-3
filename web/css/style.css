@@ -1,0 +1,167 @@
+/********************************************
+        COMMUNS
+*******************************************/
+
+body {
+    background-size: cover;
+}
+
+.bandeau {
+    width: 100%;
+    background-color: #000;
+}
+
+.bandeau p {
+    color: #f1f1f1;
+    padding: 10px;
+}
+
+.contenu {
+    background-color: #fff;
+    margin-top: 10vh;
+    margin-bottom: 10vh;
+    padding: 50px;
+    border-top: 5px solid #C82D00;
+
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+.fond {
+    height: 100vh;
+}
+
+footer {
+
+    background-color: #fff;
+}
+
+.link-footer {
+    padding: 20px;
+    background-color: #222222;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #23C0D7;
+}
+
+.copyright-block {
+    width: 100%;
+    padding: 30px;
+    background-color: #C82D00;
+    color: #fff;
+}
+
+.red {
+    color: #C82D00;
+}
+
+/******************************************
+        RESERVATION
+******************************************/
+
+#louvre_reservationbundle_order_save {
+    margin-top: 20px;
+    width: 100%;
+    margin-top: 30px;
+    color: #fff;
+    background-color: #C82D00;
+    border: 1px solid #fff;
+}
+
+#louvre_reservationbundle_order_save:hover {
+    color: #C82D00;
+    background-color: #fff;
+    border: 1px solid #C82D00;
+}
+
+#add_ticket {
+    margin-bottom: 20px;
+    color: #23C0D7;
+    background-color: #fff;
+    border: 1px solid #23C0D7;
+}
+
+#add_ticket:hover {
+    color: #fff;
+    background-color: #23C0D7;
+    border: 1px solid #fff;
+}
+
+.btn-danger {
+    color: #C82D00;
+    background-color: #fff;
+    border: 1px solid #C82D00;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #C82D00;
+    border: 1px solid #fff;
+}
+
+#titre-billets {
+    font-size: 2em;
+    font-weight: normal;
+    margin-top: 20px;
+}
+
+
+/******************************************
+        RECAPITULATIF
+******************************************/
+.checkbox a {
+    color: #333333;
+}
+.checkbox a:hover {
+    color: #23C0D7;
+}
+
+#bouton-stripe {
+    display: none;
+}
+
+.bouton {
+    width: 100%;
+    margin-top: 30px;
+    color: #fff;
+    background-color: #C82D00;
+    border: 1px solid #fff;
+}
+
+.bouton:hover {
+    color: #C82D00;
+    background-color: #fff;
+    border: 1px solid #C82D00;
+}
+
+.order-bord {
+    border-left: 3px solid #333333;
+    border-bottom: 3px solid #333333;
+    padding: 10px;
+}
+
+.tickets-bord {
+    border-left: 3px solid #ccc;
+    border-bottom: 3px solid #ccc;
+    padding: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#booking-success {
+    display: none;
+}
+
+/******************************************
+        CGV
+******************************************/

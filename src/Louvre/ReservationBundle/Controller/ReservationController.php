@@ -35,7 +35,6 @@ class ReservationController extends Controller
         $order = $request->getSession()->get('order');
         // Si on reçoit une requette AJAX et que tout s'est bien passé
         if ($bookingManager->tokenAjaxProcessing($request, $order)) {
-            $this->addFlash('notice', "Merci !");
             return $this->json(["code" => 1]);
         }
 

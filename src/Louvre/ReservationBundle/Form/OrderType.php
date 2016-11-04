@@ -24,17 +24,25 @@ class OrderType extends AbstractType
             ->add('dayVisit', DateType::class, array(
                 'format' => 'dd-MM-yyyy',
                 'years' => range(date('Y'), date('Y') + 1),
+                'label' => 'Jour de la visite',
             ))
             ->add('halfDay', CheckboxType::class, array(
-                'required' => false
+                'label' => 'Billet demi-journée',
+                'required' => false,
             ))
-            ->add('email', EmailType::class)
+            ->add('email', EmailType::class, array(
+                'label' => 'Email',
+            ))
             ->add('tickets', CollectionType::class, array(
+                'label_attr' => array('id' => 'titre-billets'),
+                'label' => 'Billets : ',
                 'entry_type' => TicketType::class,
                 'allow_add' => true,
                 'allow_delete' => true
             ))
-            ->add('save', SubmitType::class);
+            ->add('save', SubmitType::class, array(
+                'label' => 'Valider',
+            ));
     }
 
     /**
