@@ -145,23 +145,31 @@ a:hover {
 }
 
 .order-bord {
-    border-left: 3px solid #333333;
-    border-bottom: 3px solid #333333;
-    padding: 10px;
+    border-left: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    padding: 0px 10px 0px 10px;
 }
 
 .tickets-bord {
-    border-left: 3px solid #ccc;
-    border-bottom: 3px solid #ccc;
-    padding: 10px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 0px 10px 0px 10px;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
 #booking-success {
+    border-radius: 0px;
     display: none;
 }
 
 /******************************************
         CGV
 ******************************************/
+
+/********************************************
+        404
+*******************************************/
+#lien-404 {
+    color: #333333;
+}

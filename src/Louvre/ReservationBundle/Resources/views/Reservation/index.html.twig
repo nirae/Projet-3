@@ -36,8 +36,11 @@
     </p>
     {{ form_rest(form) }}
     {{ form_end(form) }}
-    {% block javascripts %}
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
     <script src="{{ asset('js/index_form.js') }}"></script>
-    {% endblock %}
+
 {% endblock %}

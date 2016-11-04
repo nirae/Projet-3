@@ -31,6 +31,3 @@ monolog:
         #    level:  info
 
 swiftmailer:
-    transport: gmail
-    username:  ndubouilh@gmail.com
-    password:  psREnolsZ44200RXnv

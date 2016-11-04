@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <title>{% block title %}Billeterie Louvre - {% endblock %}</title>
-    </head>
-    <body style="background: url('{{ asset('img/louvre-gris.jpeg') }}');">
-        <div class="bandeau">
+<head>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}" type="image/x-icon">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <title>{% block title %}Billeterie Louvre - {% endblock %}</title>
+</head>
+<body style="background: url('{{ asset('img/louvre-gris.jpeg') }}');">
+    <div class="bandeau">
+        <p class="text-center">
+            Bienvenue sur la billeterie du Musée du Louvre!
+            Pour retourner sur le site du Musée, <a href="{{ louvre_link }}">cliquez ici</a>
+        </p>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 col-xs-1 col-lg-3 fond"></div>
+        <div class="col-sm-8 col-xs-10 col-lg-6 contenu">
+            <h1 class="center">{% block titre %}{% endblock %}</h1>
+            {% block contenu %}{% endblock %}
+        </div>
+        <div class="col-sm-2 col-xs-1 col-lg-3 fond"></div>
+    </div>
+    <footer>
+        <a href="/conditions-generales">
+            <p class="text-center link-footer">
+                Conditions générales de vente
+            </p>
+        </a>
+        <div class="copyright-block">
             <p class="text-center">
-                Bienvenue sur la billeterie du Musée du Louvre!
-                Pour retourner sur le site du Musée, <a href="{{ louvre_link }}">cliquez ici</a>
+                Copyright {{ "now"|date('Y') }} © | Musée du Louvre - Paris
+            </p>
+            <p class="text-center">
+                Made with <span class="fa fa-heart"></span> by {{ webmaster }}
             </p>
         </div>
-        <div class="row">
-            <div class="col-sm-2 col-xs-1 col-lg-3 fond"></div>
-            <div class="col-sm-8 col-xs-10 col-lg-6 contenu">
-                <h1 class="center">{% block titre %}{% endblock %}</h1>
-                {% block contenu %}{% endblock %}
-            </div>
-            <div class="col-sm-2 col-xs-1 col-lg-3 fond"></div>
-        </div>
-        <footer>
-            <a href="/conditions-generales">
-                <p class="text-center link-footer">
-                    Conditions générales de vente
-                </p>
-            </a>
-            <div class="copyright-block">
-                <p class="text-center">
-                    Copyright {{ "now"|date('Y') }} © | Musée du Louvre - Paris
-                </p>
-                <p class="text-center">
-                    Made with <span class="fa fa-heart"></span> by {{ webmaster }}
-                </p>
-            </div>
-        </footer>
-    {% block javascripts %}{% endblock %}
-    </body>
+    </footer>
+</body>
 </html>
