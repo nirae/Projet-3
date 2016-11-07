@@ -134,7 +134,7 @@ class Ticket {
         // Calcul de l'age
         $age = $this->calculAge($birthDate);
         // Calcul du tarif
-        $prix = $this->calculPrice($age, $this->reducedPrice);
+        $prix = $this->calculPrice($age, $this->reducedPrice, false);
         // Remplissage du tarif
         $this->setTicketPrice($prix);
 
@@ -247,7 +247,7 @@ class Ticket {
     }
 
     // Calcul du tarif
-    private function calculPrice($age, $reducedPrice, $halfDay = false) {
+    private function calculPrice($age, $reducedPrice, $halfDay) {
         $price = 16;
 
         if ($age < 4) {
