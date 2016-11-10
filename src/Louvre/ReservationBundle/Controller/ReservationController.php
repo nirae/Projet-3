@@ -14,12 +14,12 @@ class ReservationController extends Controller
      * @Template("LouvreReservationBundle:Reservation:index.html.twig")
      */
     public function indexAction(Request $request) {
+
         $bookingManager = $this->get('louvre_reservation.bookingmanager');
 
-        $order = new Order();
-        $form = $bookingManager->createForm($order);
+        $form = $bookingManager->indexManager($request);
         // Si on reçoit le formulaire et que tout s'est bien passé
-        if ($bookingManager->formPostProcessing($request, $form, $order)) {
+        if ($bookingManager->formPostProcessing($request, $form)) {
             return $this->redirectToRoute('recapitulatif');
         }
 
@@ -31,8 +31,9 @@ class ReservationController extends Controller
      */
     public function recapAction(Request $request) {
 
-        $bookingManager = $this->get('louvre_reservation.bookingmanager');
         $order = $request->getSession()->get('order');
+
+        $bookingManager = $this->get('louvre_reservation.bookingmanager');
         // Si on reçoit une requette AJAX et que tout s'est bien passé
         if ($bookingManager->tokenAjaxProcessing($request, $order)) {
             return $this->json(["code" => 1]);

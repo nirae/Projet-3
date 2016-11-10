@@ -131,12 +131,6 @@ class Ticket {
     public function setBirthDate($birthDate)
     {
         $this->birthDate = $birthDate;
-        // Calcul de l'age
-        $age = $this->calculAge($birthDate);
-        // Calcul du tarif
-        $prix = $this->calculPrice($age, $this->reducedPrice, false);
-        // Remplissage du tarif
-        $this->setTicketPrice($prix);
 
         return $this;
     }
@@ -221,52 +215,6 @@ class Ticket {
     public function getTicketPrice()
     {
         return $this->ticketPrice;
-    }
-
-    // Calcul de l'age
-    private function calculAge($birthDate)
-    {
-        // Découpage date de naissance
-        $year =  intval(date('Y', $birthDate->getTimestamp()));
-        $month = intval(date('m', $birthDate->getTimestamp()));
-        $day = intval(date('d', $birthDate->getTimestamp()));
-
-        // Découpage date actuelle
-        $y = intval(date('Y'));
-        $m = intval(date('m'));
-        $d = intval(date('d'));
-
-        if (($month < $m) || (($month == $m) && ($day <= $d))) {
-            $age = $y - $year;
-            return $age;
-        } else {
-            $age = ($y - $year) - 1;
-            return $age;
-        }
-
-    }
-
-    // Calcul du tarif
-    private function calculPrice($age, $reducedPrice, $halfDay) {
-        $price = 16;
-
-        if ($age < 4) {
-            $price = 0;
-        } elseif ($age > 4 && $age < 12) {
-            $price = 8;
-        } elseif ($age > 60) {
-            $price = 12;
-        }
-
-        if ($halfDay == true) {
-            $price = $price / 2;
-        }
-
-        if ($reducedPrice == true) {
-            $price = $price - 10;
-        }
-
-        return $price;
     }
 
     /**
