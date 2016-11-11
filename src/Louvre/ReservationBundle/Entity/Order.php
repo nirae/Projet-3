@@ -13,63 +13,63 @@ use Louvre\ReservationBundle\Validator\AntiBookingClosedDay;
 use Louvre\ReservationBundle\Validator\AntiBookingPastDay;
 
 /**
- * @ORM\Table(name="order_louvre")
- * @ORM\Entity
- */
+* @ORM\Table(name="order_louvre")
+* @ORM\Entity
+*/
 class Order {
 
     /**
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
+    * @ORM\Column(name="id", type="integer")
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    */
     private $id;
 
     /**
-     * @ORM\Column(name="booking_date", type="datetime")
-     * @Assert\DateTime()
-     */
+    * @ORM\Column(name="booking_date", type="datetime")
+    * @Assert\DateTime()
+    */
     private $date;
 
     /**
-     * @ORM\Column(name="order_number", type="string", length=255)
-     */
+    * @ORM\Column(name="order_number", type="string", length=255)
+    */
     private $orderNumber;
 
     /**
-     * @ORM\Column(name="day_visit", type="datetime")
-     * @Assert\DateTime()
-     * @AntiBookingHoliday()
-     * @AntiBookingClosedDay()
-     * @AntiBookingPastDay()
-     * @AntiThousandBooking()
-     */
+    * @ORM\Column(name="day_visit", type="datetime")
+    * @Assert\DateTime()
+    * @AntiBookingHoliday()
+    * @AntiBookingClosedDay()
+    * @AntiBookingPastDay()
+    * @AntiThousandBooking()
+    */
     private $dayVisit;
 
     /**
-     * @ORM\Column(name="email", type="string", length=255)
-     * @Assert\Email()
-     */
+    * @ORM\Column(name="email", type="string", length=255)
+    * @Assert\Email()
+    */
     private $email;
 
     /**
-     * @ORM\Column(name="half_day", type="boolean")
-     */
+    * @ORM\Column(name="half_day", type="boolean")
+    */
     private $halfDay = false;
 
     /**
-     * @ORM\Column(name="total", type="integer")
-     */
+    * @ORM\Column(name="total", type="integer")
+    */
     private $total = 0;
 
     /**
-     * @ORM\Column(name="token", type="string", length=255)
-     */
+    * @ORM\Column(name="token", type="string", length=255)
+    */
     private $stripeToken;
 
     /**
-     * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order", cascade={"persist"})
-     */
+    * @ORM\OneToMany(targetEntity="Louvre\ReservationBundle\Entity\Ticket", mappedBy="order", cascade={"persist"})
+    */
     private $tickets;
 
     // Constructeur
@@ -85,22 +85,22 @@ class Order {
     }
 
     /**
-     * Get id
-     *
-     * @return integer
-     */
+    * Get id
+    *
+    * @return integer
+    */
     public function getId()
     {
         return $this->id;
     }
 
     /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Order
-     */
+    * Set date
+    *
+    * @param \DateTime $date
+    *
+    * @return Order
+    */
     public function setDate($date)
     {
         $this->date = $date;
@@ -109,22 +109,22 @@ class Order {
     }
 
     /**
-     * Get date
-     *
-     * @return \DateTime
-     */
+    * Get date
+    *
+    * @return \DateTime
+    */
     public function getDate()
     {
         return $this->date;
     }
 
     /**
-     * Set orderNumber
-     *
-     * @param string $orderNumber
-     *
-     * @return Order
-     */
+    * Set orderNumber
+    *
+    * @param string $orderNumber
+    *
+    * @return Order
+    */
     public function setOrderNumber($orderNumber)
     {
         $this->orderNumber = $orderNumber;
@@ -133,22 +133,22 @@ class Order {
     }
 
     /**
-     * Get orderNumber
-     *
-     * @return string
-     */
+    * Get orderNumber
+    *
+    * @return string
+    */
     public function getOrderNumber()
     {
         return $this->orderNumber;
     }
 
     /**
-     * Set dayVisit
-     *
-     * @param \DateTime $dayVisit
-     *
-     * @return Order
-     */
+    * Set dayVisit
+    *
+    * @param \DateTime $dayVisit
+    *
+    * @return Order
+    */
     public function setDayVisit($dayVisit)
     {
         $this->dayVisit = $dayVisit;
@@ -157,22 +157,22 @@ class Order {
     }
 
     /**
-     * Get dayVisit
-     *
-     * @return \DateTime
-     */
+    * Get dayVisit
+    *
+    * @return \DateTime
+    */
     public function getDayVisit()
     {
         return $this->dayVisit;
     }
 
     /**
-     * Set total
-     *
-     * @param integer $total
-     *
-     * @return Order
-     */
+    * Set total
+    *
+    * @param integer $total
+    *
+    * @return Order
+    */
     public function setTotal($total)
     {
         $this->total = $total;
@@ -181,22 +181,29 @@ class Order {
     }
 
     /**
-     * Get total
-     *
-     * @return integer
-     */
+    * Get total
+    *
+    * @return integer
+    */
     public function getTotal()
     {
         return $this->total;
     }
 
+    public function addTotal($ticketPrice)
+    {
+        $this->total += $ticketPrice;
+
+        return $this;
+    }
+
     /**
-     * Set stripeToken
-     *
-     * @param string $stripeToken
-     *
-     * @return Order
-     */
+    * Set stripeToken
+    *
+    * @param string $stripeToken
+    *
+    * @return Order
+    */
     public function setStripeToken($stripeToken)
     {
         $this->stripeToken = $stripeToken;
@@ -205,22 +212,22 @@ class Order {
     }
 
     /**
-     * Get stripeToken
-     *
-     * @return string
-     */
+    * Get stripeToken
+    *
+    * @return string
+    */
     public function getStripeToken()
     {
         return $this->stripeToken;
     }
 
     /**
-     * Set halfDay
-     *
-     * @param boolean $halfDay
-     *
-     * @return Order
-     */
+    * Set halfDay
+    *
+    * @param boolean $halfDay
+    *
+    * @return Order
+    */
     public function setHalfDay($halfDay)
     {
         $this->halfDay = $halfDay;
@@ -229,22 +236,22 @@ class Order {
     }
 
     /**
-     * Get halfDay
-     *
-     * @return boolean
-     */
+    * Get halfDay
+    *
+    * @return boolean
+    */
     public function getHalfDay()
     {
         return $this->halfDay;
     }
 
     /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return Order
-     */
+    * Set email
+    *
+    * @param string $email
+    *
+    * @return Order
+    */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -253,10 +260,10 @@ class Order {
     }
 
     /**
-     * Get email
-     *
-     * @return string
-     */
+    * Get email
+    *
+    * @return string
+    */
     public function getEmail()
     {
         return $this->email;
@@ -265,8 +272,8 @@ class Order {
     // Validation
     // Pas de billets demi-journée pour le jour meme si 14h passé
     /**
-     * @Assert\IsTrue(message = "Il n'est pas possible de réserver un billet demi-journée pour le jour même une fois 14h passée")
-     */
+    * @Assert\IsTrue(message = "Il n'est pas possible de réserver un billet demi-journée pour le jour même une fois 14h passée")
+    */
     public function isHalfDayValid()
     {
         $dayVisit = date('d/m/Y', $this->dayVisit->getTimestamp());
@@ -280,20 +287,13 @@ class Order {
         }
     }
 
-    public function addTotal($ticketPrice)
-    {
-        $this->total += $ticketPrice;
-
-        return $this;
-    }
-
     /**
-     * Add ticket
-     *
-     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
-     *
-     * @return Order
-     */
+    * Add ticket
+    *
+    * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+    *
+    * @return Order
+    */
     public function addTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
     {
         $this->tickets[] = $ticket;
@@ -302,20 +302,20 @@ class Order {
     }
 
     /**
-     * Remove ticket
-     *
-     * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
-     */
+    * Remove ticket
+    *
+    * @param \Louvre\ReservationBundle\Entity\Ticket $ticket
+    */
     public function removeTicket(\Louvre\ReservationBundle\Entity\Ticket $ticket)
     {
         $this->tickets->removeElement($ticket);
     }
 
     /**
-     * Get tickets
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
+    * Get tickets
+    *
+    * @return \Doctrine\Common\Collections\Collection
+    */
     public function getTickets()
     {
         return $this->tickets;
