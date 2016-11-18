@@ -38,7 +38,6 @@ class ReservationController extends Controller
         if ($bookingManager->tokenAjaxProcessing($request, $order)) {
             return $this->json(["code" => 1]);
         }
-
         return array('order' => $order);
     }
 

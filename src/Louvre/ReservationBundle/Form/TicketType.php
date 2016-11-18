@@ -19,6 +19,7 @@ class TicketType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
+                'attr' => array('class' => 'ticket'),
                 'label' => 'Nom',
             ))
             ->add('firstName', TextType::class, array(

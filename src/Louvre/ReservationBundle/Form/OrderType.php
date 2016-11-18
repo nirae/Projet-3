@@ -39,9 +39,6 @@ class OrderType extends AbstractType
                 'entry_type' => TicketType::class,
                 'allow_add' => true,
                 'allow_delete' => true
-            ))
-            ->add('save', SubmitType::class, array(
-                'label' => 'Valider',
             ));
     }
 

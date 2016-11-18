@@ -13,9 +13,6 @@ class BookingManager {
     private $em;
     private $formfactory;
 
-    private $form;
-    private $order;
-
     public function __construct(\Swift_Mailer $mailer, $templating, EntityManagerInterface $em, $formfactory) {
 
         $this->mailer = $mailer;
@@ -128,7 +125,7 @@ class BookingManager {
     }
 
     // Calcul de l'age
-    private function calculAge($birthDate)
+    public function calculAge($birthDate)
     {
         // Découpage date de naissance
         $year =  intval(date('Y', $birthDate->getTimestamp()));
@@ -151,7 +148,7 @@ class BookingManager {
     }
 
     // Calcul du tarif
-    private function calculPrice($age, $reducedPrice, $halfDay) {
+    public function calculPrice($age, $reducedPrice, $halfDay) {
         $price = 16;
 
         if ($age < 4) {

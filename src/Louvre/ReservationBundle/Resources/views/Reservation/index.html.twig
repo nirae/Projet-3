@@ -23,7 +23,7 @@
 
         <div>
             {{ form_label(form.tickets) }}
-            {{ form_errors(form.tickets) }}
+
             {{ form_widget(form.tickets) }}
         </div>
 
@@ -34,6 +34,7 @@
         d'un service du ministère de la Culture, militaires...
         Un justificatif vous sera demandé a l'entrée.
     </p>
+    <input type="submit" id="louvre_reservationbundle_order_save" class="btn-default btn" value="Valider">
     {{ form_end(form) }}
 
     <script

@@ -28,17 +28,21 @@ class Order {
     /**
     * @ORM\Column(name="booking_date", type="datetime")
     * @Assert\DateTime()
+    * @Assert\NotBlank()
     */
     private $date;
 
     /**
     * @ORM\Column(name="order_number", type="string", length=255)
+    * @Assert\NotBlank()
+    * @Assert\Type(type="string")
     */
     private $orderNumber;
 
     /**
     * @ORM\Column(name="day_visit", type="datetime")
     * @Assert\DateTime()
+    * @Assert\NotBlank()
     * @AntiBookingHoliday()
     * @AntiBookingClosedDay()
     * @AntiBookingPastDay()
@@ -59,6 +63,7 @@ class Order {
 
     /**
     * @ORM\Column(name="total", type="integer")
+    * @Assert\Type(type="int")
     */
     private $total = 0;
 
@@ -272,15 +277,15 @@ class Order {
     // Validation
     // Pas de billets demi-journée pour le jour meme si 14h passé
     /**
-    * @Assert\IsTrue(message = "Il n'est pas possible de réserver un billet demi-journée pour le jour même une fois 14h passée")
+    * @Assert\IsTrue(message = "Il n'est pas possible de réserver un billet journée pour le jour même une fois 14h passée")
     */
     public function isHalfDayValid()
     {
         $dayVisit = date('d/m/Y', $this->dayVisit->getTimestamp());
-        $hourToday = date('H');
+        $hourToday = date('H', $this->date->getTimestamp());
         $today = date('d/m/Y');
 
-        if ($this->halfDay == true && $today == $dayVisit) {
+        if ($this->halfDay == false && $today == $dayVisit) {
             if (intval($hourToday) >= 14) {
                 return false;
             }
