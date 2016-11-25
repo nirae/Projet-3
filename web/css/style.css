@@ -149,7 +149,7 @@ a:hover {
     padding: 0px 10px 0px 10px;
 }
 
-.tickets-bord {
+.bloc-ticket-recap {
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     padding: 0px 10px 0px 10px;
@@ -161,6 +161,7 @@ a:hover {
     border-radius: 0px;
     display: none;
 }
+
 
 /******************************************
         CGV

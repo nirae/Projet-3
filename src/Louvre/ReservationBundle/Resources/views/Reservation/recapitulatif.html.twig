@@ -33,32 +33,34 @@
 <h3>Billets :</h3>
 <div class="tickets-bord">
     {% for ticket in order.tickets %}
-    <p class="recap">
-        <strong>Nom : </strong>
-        {{ ticket.name }}
-    </p>
-    <p class="recap">
-        <strong>Prénom : </strong>
-        {{ ticket.firstName }}
-    </p>
-    <p class="recap">
-        <strong>Date de naissance : </strong>
-        {{ ticket.birthDate|date('d/m/Y') }}
-    </p>
-    <p class="recap">
-        <strong>Pays : </strong>
-        {{ ticket.country }}
-    </p>
-    {% if ticket.reducedPrice == true %}
-    <p class="recap">
-        <span class="fa fa-exclamation-triangle"></span>
-        Tarif réduit. Un justificatif sera demandé a l'entrée
-    </p>
-    {% endif %}
-    <p class="recap">
-        <strong>Prix du billet : </strong>
-        {{ ticket.ticketPrice }} €
-    </p>
+    <div class="bloc-ticket-recap">
+        <p class="recap">
+            <strong>Nom : </strong>
+            {{ ticket.name }}
+        </p>
+        <p class="recap">
+            <strong>Prénom : </strong>
+            {{ ticket.firstName }}
+        </p>
+        <p class="recap">
+            <strong>Date de naissance : </strong>
+            {{ ticket.birthDate|date('d/m/Y') }}
+        </p>
+        <p class="recap">
+            <strong>Pays : </strong>
+            {{ ticket.country }}
+        </p>
+        {% if ticket.reducedPrice == true %}
+        <p class="recap">
+            <span class="fa fa-exclamation-triangle"></span>
+            Tarif réduit. Un justificatif sera demandé a l'entrée
+        </p>
+        {% endif %}
+        <p class="recap">
+            <strong>Prix du billet : </strong>
+            {{ ticket.ticketPrice }} €
+        </p>
+    </div>
     {% endfor %}
 </div>
 <p class="recap">
